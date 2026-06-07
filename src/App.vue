@@ -70,8 +70,10 @@ const coreStandards = [
 // 5. 範例圖展示邏輯
 const displayedExamples = ref([])
 
-const addExample = (imgPath) => {
-  displayedExamples.value.push(imgPath)
+const addExample = (imgName) => {
+  // 使用 BASE_URL 自動適應 GitHub Pages 的路徑 (/20260607/)
+  const fullPath = `${import.meta.env.BASE_URL}${imgName}`
+  displayedExamples.value.push(fullPath)
 }
 
 // 6. 攝水量計算器邏輯
@@ -152,17 +154,17 @@ const calculatedIntake = computed(() => {
           <div class="info-card">
             <h4>窗戶陽台防護網</h4>
             <p>紗窗擋不住貓，必須加裝防護網防墜樓。</p>
-            <button @click="addExample('../3.jpg')" class="example-btn">點我看範例圖</button>
+            <button @click="addExample('3.jpg')" class="example-btn">點我看範例圖</button>
           </div>
           <div class="info-card">
             <h4>豐富的垂直空間</h4>
             <p>準備貓跳台、頂天立地柱減緩貓咪壓力。</p>
-            <button @click="addExample('../2.jpg')" class="example-btn">點我看範例圖</button>
+            <button @click="addExample('2.jpg')" class="example-btn">點我看範例圖</button>
           </div>
           <div class="info-card">
             <h4>遠離有害危險物品</h4>
             <p>嚴禁擺放百合花、金針花（對貓劇毒），收好橡皮筋與線條。</p>
-            <button @click="addExample('../1.jpg')" class="example-btn">點我看範例圖</button>
+            <button @click="addExample('1.jpg')" class="example-btn">點我看範例圖</button>
           </div>
         </div>
 
@@ -416,8 +418,8 @@ body {
 /* Hero 區塊 */
 .hero {
   margin-top: 80px; /* 配合導覽列高度調整 */
-  /* 使用 4.jpg 作為背景，並加上一層半透明遮罩確保文字清晰 */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../4.jpg');
+  /* 放在 public 的檔案在 CSS 中直接用 /filename 即可，Vite 打包時會自動處理 base 路徑 */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/4.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
